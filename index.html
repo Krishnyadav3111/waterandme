@@ -1,168 +1,529 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-    <title>Water & Me - Swim Academy</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Water &amp; Me | Swim Lessons &amp; Online Yoga</title>
+<meta name="description" content="Water &amp; Me: private swim lessons with Coach Krishna in San Jose and the Bay Area, plus live online yoga classes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&display=swap">
+<style>
+/* Layout: sticky header with two tabs (Swim / Yoga); each tab is its own full page view */
+:root{
+  --bg:#000000; --card:#0E0D0A; --line:#26221A; --line-soft:#1C1914;
+  --ink:#F3EEE3; --soft:#D8D0BE; --muted:#B3AA96; --faint:#8F8672;
+  --gold:#F5C463; --gold-ink:#1A1204;
+  --water:#6CC4D6; --water-deep:#0B2A33;
+  --f-display:"Sora","Segoe UI",system-ui,sans-serif;
+  --f-body:"Nunito Sans",system-ui,-apple-system,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:17px;line-height:1.55}
+a{color:var(--gold)} a:hover{color:#FFD98A}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+h1,h2,h3{text-wrap:balance}
+.wrap{max-width:1160px;margin:0 auto;padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px))}
 
-    <style>
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f4f9ff;
-            text-align: center;
-        }
+/* Header + tabs */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:rgba(0,0,0,.92);backdrop-filter:blur(8px);border-bottom:1px solid #1F1C16}
+.top .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 20px;padding-block:14px}
+.brand{font-family:var(--f-display);font-weight:700;font-size:22px;color:var(--ink);text-decoration:none;white-space:nowrap}
+.tabs{display:flex;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:4px;gap:4px}
+.tabs a{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--muted);font-weight:700;font-size:15px;padding:10px 20px;min-height:44px;border-radius:10px}
+.tabs a[aria-current="page"]{background:var(--gold);color:var(--gold-ink)}
+.tabs svg{width:18px;height:18px}
+.call{color:var(--ink);text-decoration:none;font-weight:700;font-size:15px;white-space:nowrap;font-variant-numeric:tabular-nums}
+@media (max-width:620px){.call{display:none}.tabs{flex:1 1 100%}.tabs a{flex:1;justify-content:center}}
 
-        header {
-            background: linear-gradient(to right, #0077b6, #00b4d8);
-            color: white;
-            padding: 40px 20px;
-        }
+/* Shared blocks */
+.view[hidden]{display:none!important}
+.hero .wrap{min-height:600px;padding-block:96px 80px;display:flex;align-items:center}
+.hero-copy{max-width:560px;min-width:0;display:flex;flex-direction:column;gap:22px}
+.eyebrow{margin:0;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+h1{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(36px,5vw,60px);line-height:1.05;letter-spacing:-.02em;color:#fff}
+.lead{margin:0;font-size:19px;color:var(--soft)}
+.btns{display:flex;flex-wrap:wrap;gap:12px}
+.btn{display:inline-block;text-decoration:none;font-weight:700;padding:15px 26px;border-radius:12px;text-align:center}
+.btn.gold{background:var(--gold);color:var(--gold-ink);box-shadow:0 0 40px rgba(245,196,99,.35)}
+.btn.line{color:#fff;border:1px solid #4A4232}
+.btn.outline{border:1px solid var(--gold);color:var(--gold)}
+.checks{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px 20px;color:var(--soft);font-size:15px;margin:8px 0 0;padding:0;list-style:none}
+.checks li{display:flex;gap:10px;align-items:center}
+.checks svg{flex:0 0 auto}
 
-        h1 { margin: 0; }
+.glow{background:radial-gradient(ellipse 50% 40% at 85% 0%,rgba(245,196,99,.10),transparent 70%),radial-gradient(ellipse 45% 30% at 10% 55%,rgba(245,196,99,.07),transparent 70%),radial-gradient(ellipse 50% 30% at 90% 90%,rgba(245,196,99,.08),transparent 70%),var(--bg)}
+section.block{padding-block:64px 24px}
+.glow > section.block:last-child{padding-bottom:88px}
+h2{margin:0 0 28px;font-family:var(--f-display);font-size:34px;letter-spacing:-.01em}
+.sub{margin:-20px 0 28px;color:var(--muted);max-width:640px}
+.grid{display:grid;gap:20px}
+.g3{grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.g5{grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:26px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.card h3{margin:0;font-family:var(--f-display);font-size:20px}
+.card p{margin:0;color:var(--muted)}
+.step{font-family:var(--f-display);font-weight:700;font-size:28px;color:var(--gold)!important}
+.head-row{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:24px}
+.head-row h2{margin:0}
+.note{margin:0;color:var(--muted);font-size:15px}
 
-        section {
-            padding: 40px 20px;
-        }
+.plan{border-radius:18px;padding:30px;gap:14px}
+.plan.best{background:linear-gradient(160deg,#3A2E14 0%,#17130B 55%,#0E0D0A 100%);border-color:#6B5524;box-shadow:0 0 60px rgba(245,196,99,.18)}
+.plan.best p{color:var(--soft)}
+.plan-top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.badge{background:var(--gold);color:var(--gold-ink);font-size:12px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.price{font-family:var(--f-display);font-size:40px;font-weight:700;color:var(--ink)!important;font-variant-numeric:tabular-nums;line-height:1.2}
+.price span{font-size:16px;font-weight:500;color:var(--muted)}
+.plan .btn{margin-top:auto;padding:14px}
+.g-plans{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
 
-        .button {
-            display: inline-block;
-            padding: 12px 25px;
-            background-color: #0077b6;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            margin-top: 15px;
-        }
+/* Swim */
+.hero.swim{background:radial-gradient(ellipse 55% 75% at 80% 40%,rgba(108,196,214,.20),transparent 65%),radial-gradient(ellipse 40% 50% at 75% 70%,rgba(245,196,99,.10),transparent 70%),linear-gradient(180deg,#02090C 0%,#000 100%);position:relative;overflow:hidden}
+.waves{position:absolute;right:-40px;bottom:0;width:min(720px,70%);height:auto;opacity:.9;pointer-events:none}
+.hero.swim .wrap{position:relative}
+.feature{display:flex;gap:14px;align-items:flex-start}
+.feature .ico{flex:0 0 auto;width:44px;height:44px;border-radius:12px;background:#1A160D;display:grid;place-items:center}
+.feature h3{font-size:18px}
+.about{display:flex;flex-wrap:wrap;gap:40px;align-items:center}
+.about-photo{flex:1 1 320px;min-width:0;aspect-ratio:4/5;max-width:440px;border-radius:20px;overflow:hidden;background:radial-gradient(circle at 50% 35%,#16323A,#05090B 75%);border:1px solid var(--line);position:relative}
+.about-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.about-photo .ph{position:absolute;inset:0;display:grid;place-items:center;color:var(--faint);font-weight:600;font-size:14px}
+.about-copy{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:16px}
+.about-copy p{margin:0;color:var(--soft)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.tags li{border:1px solid #4A4232;color:var(--gold);font-size:14px;font-weight:700;padding:6px 12px;border-radius:99px}
+.quote{gap:16px}
+.quote blockquote{margin:0;font-family:var(--f-display);font-size:18px;font-weight:500;line-height:1.4;color:var(--ink)}
+.quote figcaption{color:var(--muted);font-size:15px}
+.quote figcaption b{color:var(--ink)}
+.book{background:var(--card);border:1px solid #6B5524;border-radius:18px;padding:36px;display:flex;flex-wrap:wrap;gap:24px 40px;align-items:center;justify-content:space-between;box-shadow:0 0 60px rgba(245,196,99,.12)}
+.book > div{flex:1 1 380px;min-width:0}
+.book h2{margin:0 0 8px;font-size:30px}
+.book p{margin:0;color:var(--muted)}
+.phone{font-family:var(--f-display);font-size:26px;font-weight:700;color:var(--gold);font-variant-numeric:tabular-nums;margin-top:12px!important}
 
-        .button:hover {
-            background-color: #023e8a;
-        }
+/* Yoga */
+.hero.yoga{background:linear-gradient(90deg,#000 0%,rgba(0,0,0,.92) 30%,rgba(0,0,0,.35) 55%,rgba(0,0,0,0) 70%),url("yoga-hero.jpg") right center/cover no-repeat,#000}
+@media (max-width:760px){
+  .hero.yoga{background:linear-gradient(180deg,rgba(0,0,0,.2) 0%,rgba(0,0,0,.75) 45%,#000 75%),url("yoga-hero.jpg") 70% top/auto 480px no-repeat,#000}
+  .hero.yoga .wrap{padding-top:340px;min-height:0}
+  .hero.swim .wrap{min-height:0;padding-block:64px 220px}
+  .waves{width:110%;right:-5%}
+}
+.table-box{overflow-x:auto;background:var(--card);border:1px solid var(--line);border-radius:16px}
+table{width:100%;min-width:640px;border-collapse:collapse;font-size:16px}
+th{text-align:left;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:.08em;padding:16px 20px;border-bottom:1px solid var(--line)}
+td{padding:16px 20px;border-bottom:1px solid var(--line-soft)}
+tr:last-child td{border-bottom:0}
+td.t{font-weight:700;white-space:nowrap;font-variant-numeric:tabular-nums;color:var(--gold)}
+td.n{font-weight:600}
+td.d,td.c{color:var(--muted)}
+.pill{background:#2A2416;color:#F5D592;font-size:13px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.coach{padding:20px;gap:10px}
+.photo{width:100%;aspect-ratio:1/1;border-radius:12px;background:radial-gradient(circle at 50% 30%,#2E2717,#0B0A08 75%);display:grid;place-items:center;color:var(--faint);font-size:13px;font-weight:600}
+.coach .name{font-family:var(--f-display);font-weight:600;font-size:18px;color:var(--ink)}
+.coach .style{font-size:14px}
+.toggle{display:flex;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:4px;gap:4px}
+.toggle button{border:0;border-radius:9px;padding:10px 16px;min-height:44px;font:700 14px var(--f-body);cursor:pointer;background:transparent;color:var(--ink)}
+.toggle button[aria-pressed="true"]{background:var(--gold);color:var(--gold-ink)}
+.pay{background:var(--card);border:1px solid #6B5524;border-radius:18px;padding:32px;display:flex;flex-wrap:wrap;gap:32px;box-shadow:0 0 60px rgba(245,196,99,.12)}
+.pay > div{flex:1 1 280px;min-width:0;display:flex;flex-direction:column;gap:10px}
+.pay h2{margin:0;font-size:30px}
+.pay p{margin:0;color:var(--muted)}
+.label{margin-top:8px!important;font-size:13px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.zelle{display:flex;flex-wrap:wrap;align-items:center;gap:12px}
+.zelle strong{font-family:var(--f-display);font-size:22px;color:var(--gold);overflow-wrap:anywhere}
+.copy{border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:10px;padding:8px 14px;min-height:40px;font:600 14px var(--f-body);cursor:pointer}
+.pay ol{flex:2 1 420px;min-width:0;margin:0;padding-left:22px;display:flex;flex-direction:column;gap:12px}
+.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px 40px}
+.faq h3{margin:0 0 6px;font-size:18px}
+.faq p{margin:0;color:var(--muted)}
 
-        .card {
-            background: white;
-            padding: 20px;
-            margin: 20px auto;
-            max-width: 400px;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-        }
+/* Forms */
+.form-card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:20px;max-width:820px}
+.fgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px 20px}
+.fgrid label{display:flex;flex-direction:column;gap:6px;font-size:14px;font-weight:700;color:var(--soft);min-width:0}
+.fgrid .full{grid-column:1/-1}
+.fgrid input,.fgrid select,.fgrid textarea{font:16px var(--f-body);color:var(--ink);background:#000;border:1px solid #3A3426;border-radius:10px;padding:12px 14px;min-height:46px;width:100%}
+.fgrid input:focus,.fgrid select:focus,.fgrid textarea:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent}
+.fgrid .check{flex-direction:row;align-items:center;gap:10px;font-weight:600}
+.fgrid .check input{width:20px;height:20px;min-height:0;accent-color:var(--gold)}
+.form-card .btn{align-self:flex-start;border:0;font:700 16px var(--f-body);cursor:pointer}
+.form-card .btn[disabled]{opacity:.6;cursor:wait}
+.fmsg{margin:0;font-weight:600}
+.fmsg.ok{color:#8FE3A0}.fmsg.err{color:#FF9A8A}
+.bad{border-color:#FF9A8A!important}
 
-        footer {
-            background-color: #0077b6;
-            color: white;
-            padding: 15px;
-        }
-
-        @media (max-width: 600px) {
-            header { padding: 30px 10px; }
-        }
-    </style>
+footer{border-top:1px solid #1F1C16;color:var(--faint)}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:16px;font-size:15px;padding-block:36px calc(36px + env(safe-area-inset-bottom,0px))}
+footer p{margin:0}
+footer a{color:var(--soft);text-decoration:none}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
 </head>
-
 <body>
 
-<header>
-    <h1>🌊 Water & Me</h1>
-    <p>Professional Swimming Lessons with Coach Krishna</p>
-    <a href="tel:6504501938" class="button">Call Now - 650-450-1938</a>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#swim">Water &amp; Me</a>
+    <nav class="tabs" aria-label="Programs">
+      <a href="#swim" data-tab="swim" aria-current="page">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 16c2 0 2-1.5 4-1.5S8 16 10 16s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><path d="M2 20c2 0 2-1.5 4-1.5S8 20 10 20s2-1.5 4-1.5 2 1.5 4 1.5 2-1.5 4-1.5"/><circle cx="15" cy="6" r="2"/><path d="M5 12l4-4 3 2 3-3"/></svg>Swim
+      </a>
+      <a href="#yoga" data-tab="yoga">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="4.5" r="2"/><path d="M12 7.5v6"/><path d="M6 11l6 2.5 6-2.5"/><path d="M5 19c2-2 4.5-3 7-3s5 1 7 3"/></svg>Yoga
+      </a>
+    </nav>
+    <a class="call" href="tel:+16504501938">650-450-1938</a>
+  </div>
 </header>
 
-<section>
-    <h2>Learn to Swim with Confidence</h2>
-    <p>Private & Group Lessons in San Jose & Bay Area</p>
-</section>
+<main>
 
-<section>
-    <h2>Programs & Pricing</h2>
-
-    <div class="card">
-        <h3>Private Lesson</h3>
-        <p>$80 per session</p>
+<!-- ================= SWIM ================= -->
+<div class="view" id="view-swim">
+  <section class="hero swim">
+    <svg class="waves" viewBox="0 0 720 300" aria-hidden="true" fill="none">
+      <path d="M0 120 Q60 90 120 120 T240 120 T360 120 T480 120 T600 120 T720 120" stroke="#6CC4D6" stroke-opacity=".35" stroke-width="2"/>
+      <path d="M0 170 Q60 140 120 170 T240 170 T360 170 T480 170 T600 170 T720 170" stroke="#6CC4D6" stroke-opacity=".5" stroke-width="2"/>
+      <path d="M0 220 Q60 190 120 220 T240 220 T360 220 T480 220 T600 220 T720 220" stroke="#F5C463" stroke-opacity=".45" stroke-width="2"/>
+      <path d="M0 270 Q60 240 120 270 T240 270 T360 270 T480 270 T600 270 T720 270" stroke="#6CC4D6" stroke-opacity=".3" stroke-width="2"/>
+    </svg>
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">Swim Academy · San Jose &amp; Bay Area</p>
+        <h1>Learn to swim with confidence.</h1>
+        <p class="lead">Private and group swimming lessons with Coach Krishna, for all ages and every level.</p>
+        <div class="btns">
+          <a class="btn gold" href="tel:+16504501938">Call 650-450-1938</a>
+          <a class="btn line" href="#swim-programs">See programs</a>
+        </div>
+        <ul class="checks">
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Certified coach</li>
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>10+ years coaching</li>
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Safety-first approach</li>
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>All age groups</li>
+        </ul>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-        <h3>Monthly Package</h3>
-        <p>$260 (4 Sessions)</p>
+  <div class="glow">
+    <section id="swim-programs" class="block wrap">
+      <h2>Programs &amp; pricing</h2>
+      <div class="grid g-plans">
+        <div class="card plan best">
+          <h3>Private Lesson</h3>
+          <p class="price">$80<span> / 45 minutes</span></p>
+          <p>One-on-one coaching focused on your goals, from first strokes to stroke correction. All ages.</p>
+          <a class="btn gold" href="#swim-request">Book a private lesson</a>
+        </div>
+        <div class="card plan">
+          <h3>Group Lesson</h3>
+          <p class="price">$40<span> / 45 minutes</span></p>
+          <p>Learn and practice with a small group. All age groups welcome.</p>
+          <a class="btn outline" href="#swim-request">Book a group lesson</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="block wrap">
+      <h2>Why choose Water &amp; Me?</h2>
+      <div class="grid g4">
+        <div class="card feature"><div class="ico"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M8.5 12.5L7 22l5-3 5 3-1.5-9.5"/></svg></div><div><h3>Certified coach</h3><p>Trained, qualified instruction every session.</p></div></div>
+        <div class="card feature"><div class="ico"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4"/></svg></div><div><h3>Safety first</h3><p>Water safety comes before speed, always.</p></div></div>
+        <div class="card feature"><div class="ico"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></svg></div><div><h3>Personalized training</h3><p>Lessons shaped to each swimmer's level and goals.</p></div></div>
+        <div class="card feature"><div class="ico"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></div><div><h3>10+ years experience</h3><p>A decade of coaching kids and adults.</p></div></div>
+      </div>
+    </section>
+
+    <section class="block wrap">
+      <div class="about">
+        <div class="about-photo">
+          <span class="ph">Coach Krishna</span>
+          <img src="coach.jpg" alt="Coach Krishna training a swimmer" loading="lazy" onerror="this.remove()">
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow">About the coach</p>
+          <h2 style="margin:0">Coach Krishna Mamindla</h2>
+          <p>Coach Krishna has 10+ years of swimming and coaching experience. He helps kids and adults build water confidence, learn proper technique, and improve endurance.</p>
+          <p>Lessons are offered for beginners, intermediate swimmers, and advanced stroke correction.</p>
+          <ul class="tags"><li>Patient &amp; safety-first</li><li>Kids + adults</li><li>San Jose &amp; Bay Area</li></ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="block wrap">
+      <h2>What families say</h2>
+      <div class="grid g3">
+        <figure class="card quote" style="margin:0"><blockquote>“Coach Krishna helped my child overcome water fear in just a few weeks. Very professional.”</blockquote><figcaption><b>Priya S.</b> · San Jose</figcaption></figure>
+        <figure class="card quote" style="margin:0"><blockquote>“Amazing coaching and clear feedback on strokes. I improved quickly.”</blockquote><figcaption><b>Michael R.</b> · Santa Clara</figcaption></figure>
+        <figure class="card quote" style="margin:0"><blockquote>“Punctual, friendly, and great with kids. Highly recommended.”</blockquote><figcaption><b>Anjali K.</b> · Fremont</figcaption></figure>
+      </div>
+    </section>
+
+    <section id="swim-book" class="block wrap">
+      <div class="book">
+        <div>
+          <h2>Book your first lesson today</h2>
+          <p>Call or text to check availability and choose a program that fits your goal.</p>
+          <p class="phone">650-450-1938</p>
+        </div>
+        <div class="btns">
+          <a class="btn gold" href="tel:+16504501938">Call now</a>
+          <a class="btn line" href="sms:+16504501938">Text now</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="swim-request" class="block wrap">
+      <h2>Request a lesson</h2>
+      <p class="sub">Leave your details and Coach Krishna will call or text you to set up a time.</p>
+      <form class="form-card" data-table="swim_requests" novalidate>
+        <div class="fgrid">
+          <label>Your name<input name="name" required autocomplete="name"></label>
+          <label>Phone<input name="phone" type="tel" required autocomplete="tel"></label>
+          <label>Email (optional)<input name="email" type="email" autocomplete="email"></label>
+          <label>Lesson type
+            <select name="lesson_type" required><option value="">Choose one</option><option>Private ($80)</option><option>Group ($40)</option></select>
+          </label>
+          <label>Swimmer
+            <select name="age_group" required><option value="">Choose one</option><option>Kid (under 12)</option><option>Teen (12 to 17)</option><option>Adult</option></select>
+          </label>
+          <label>Level
+            <select name="level"><option value="">Choose one</option><option>Beginner / afraid of water</option><option>Can swim a little</option><option>Intermediate</option><option>Advanced / stroke correction</option></select>
+          </label>
+          <label class="full">Preferred days and times<input name="preferred_times" placeholder="e.g. weekday evenings, Saturday morning"></label>
+          <label class="full">Anything else? (optional)<textarea name="message" rows="3"></textarea></label>
+        </div>
+        <button class="btn gold" type="submit">Send request</button>
+        <p class="fmsg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </div>
+</div>
+
+<!-- ================= YOGA ================= -->
+<div class="view" id="view-yoga" hidden>
+  <section class="hero yoga">
+    <div class="wrap">
+      <div class="hero-copy">
+        <p class="eyebrow">New from Water &amp; Me</p>
+        <h1>Live online yoga, from wherever you are.</h1>
+        <p class="lead">Join from home at set times every week and follow along with certified coaches.</p>
+        <div class="btns">
+          <a class="btn gold" href="#yoga-plans">Start your membership</a>
+          <a class="btn line" href="#yoga-schedule">See the schedule</a>
+        </div>
+        <ul class="checks">
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Live on Zoom, 45 minutes</li>
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Certified, experienced coaches</li>
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>Morning and evening classes</li>
+          <li><svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#F5C463" stroke-width="2"><path d="M5 12l5 5L20 7"/></svg>All levels welcome, 18+</li>
+        </ul>
+      </div>
     </div>
+  </section>
 
-    <div class="card">
-        <h3>Kids and adults Beginner Program</h3>
-        <p>Water Safety + Stroke Basics</p>
-    </div>
-</section>
+  <div class="glow">
+    <section class="block wrap">
+      <h2>How it works</h2>
+      <div class="grid g3">
+        <div class="card"><p class="step">1</p><h3>Subscribe</h3><p>Pick a plan and pay with Zelle.</p></div>
+        <div class="card"><p class="step">2</p><h3>Choose your classes</h3><p>Reserve any class on the weekly schedule.</p></div>
+        <div class="card"><p class="step">3</p><h3>Join and follow along</h3><p>Get your Zoom link by email and follow along live.</p></div>
+      </div>
+    </section>
 
-<section>
-    <h2>Why Choose Water & Me?</h2>
-    <p>✔ Certified Coach</p>
-    <p>✔ Safety First Approach</p>
-    <p>✔ Personalized Training</p>
-    <p>✔ 10+ Years Coaching Experience</p>
-</section>
+    <section id="yoga-schedule" class="block wrap">
+      <div class="head-row"><h2>Weekly schedule</h2><p class="note">All times Pacific (San Jose)</p></div>
+      <div class="table-box">
+        <table>
+          <thead><tr><th>Time</th><th>Class</th><th>Days</th><th>Level</th><th>Coach</th></tr></thead>
+          <tbody>
+            <tr><td class="t">6:00 AM</td><td class="n">Sunrise Flow</td><td class="d">Mon, Wed, Fri</td><td><span class="pill">All levels</span></td><td class="c">[Coach 1]</td></tr>
+            <tr><td class="t">7:00 AM</td><td class="n">Hatha Basics</td><td class="d">Tue, Thu</td><td><span class="pill">Beginner</span></td><td class="c">[Coach 2]</td></tr>
+            <tr><td class="t">7:00 AM</td><td class="n">Pranayama &amp; Breath</td><td class="d">Sat</td><td><span class="pill">All levels</span></td><td class="c">[Coach 3]</td></tr>
+            <tr><td class="t">5:30 PM</td><td class="n">Back &amp; Shoulder Care</td><td class="d">Mon, Wed</td><td><span class="pill">All levels</span></td><td class="c">[Coach 4]</td></tr>
+            <tr><td class="t">6:30 PM</td><td class="n">Power Vinyasa</td><td class="d">Tue, Thu</td><td><span class="pill">Intermediate</span></td><td class="c">[Coach 5]</td></tr>
+            <tr><td class="t">7:30 PM</td><td class="n">Evening Stretch &amp; Relax</td><td class="d">Mon to Fri</td><td><span class="pill">All levels</span></td><td class="c">[Coach 1]</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
 
-    <section class="about" id="about">
-<div class="container">
-<h2>About Coach Krishna</h2>
-<img src="https://waterandme.org/coach.jpg" alt="Coach Krishna Training" style="display:block; margin:20px auto; width:100%; max-width:600px; border-radius:16px;">
+    <section class="block wrap">
+      <h2>Meet the coaches</h2>
+      <p class="sub">Certified yoga teachers, each with years of teaching experience.</p>
+      <div class="grid g5">
+        <div class="card coach"><div class="photo" aria-hidden="true">Coach photo</div><p class="name">[Coach 1]</p><p class="style">Hatha and Vinyasa</p></div>
+        <div class="card coach"><div class="photo" aria-hidden="true">Coach photo</div><p class="name">[Coach 2]</p><p class="style">Beginner Hatha</p></div>
+        <div class="card coach"><div class="photo" aria-hidden="true">Coach photo</div><p class="name">[Coach 3]</p><p class="style">Pranayama and meditation</p></div>
+        <div class="card coach"><div class="photo" aria-hidden="true">Coach photo</div><p class="name">[Coach 4]</p><p class="style">Therapeutic yoga</p></div>
+        <div class="card coach"><div class="photo" aria-hidden="true">Coach photo</div><p class="name">[Coach 5]</p><p class="style">Power Vinyasa</p></div>
+      </div>
+    </section>
 
-<p>
-With 10+ years of swimming and coaching experience, Coach Krishna helps kids and adults
-build water confidence, learn proper technique, and improve endurance—step by step.
-Lessons are tailored for beginners, intermediate swimmers, and advanced stroke correction.
-</p>
-<div class="badges">
-<span>✅ Patient & Safety-First</span>
-<span>✅ Kids + Adults</span>
-<span>✅ San Jose & Bay Area</span>
+    <section id="yoga-plans" class="block wrap">
+      <div class="head-row">
+        <h2>Plans</h2>
+        <div class="toggle" role="group" aria-label="Billing">
+          <button type="button" id="bill-monthly" aria-pressed="true">Monthly</button>
+          <button type="button" id="bill-yearly" aria-pressed="false">Yearly, 2 months free</button>
+        </div>
+      </div>
+      <div class="grid g-plans">
+        <div class="card plan">
+          <h3>Drop-in</h3>
+          <p class="price">$15<span> / class</span></p>
+          <p>Try any single class. No commitment.</p>
+          <a class="btn outline" href="#yoga-pay">Book one class</a>
+        </div>
+        <div class="card plan best">
+          <div class="plan-top"><h3>Unlimited</h3><span class="badge">Most popular</span></div>
+          <p class="price"><b data-m="$39" data-y="$390">$39</b><span data-m=" / month" data-y=" / year"> / month</span></p>
+          <p>Every live class, every week. Cancel anytime.</p>
+          <a class="btn gold" href="#yoga-pay">Subscribe</a>
+        </div>
+        <div class="card plan">
+          <h3>8 classes</h3>
+          <p class="price"><b data-m="$29" data-y="$290">$29</b><span data-m=" / month" data-y=" / year"> / month</span></p>
+          <p>Two classes a week. Great for a steady routine.</p>
+          <a class="btn outline" href="#yoga-pay">Subscribe</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="yoga-pay" class="block wrap">
+      <div class="pay">
+        <div>
+          <h2>How to pay</h2>
+          <p>We take payment by Zelle.</p>
+          <p class="label">Send Zelle to</p>
+          <div class="zelle"><strong id="zelle-email">waterandme@gmail.com</strong><button type="button" class="copy" id="copy-email">Copy</button></div>
+        </div>
+        <ol>
+          <li>Open your bank app and send the plan amount by Zelle to waterandme@gmail.com.</li>
+          <li>In the memo, write your full name, your email, and the plan (Drop-in, Unlimited, or 8 classes).</li>
+          <li>We email you a confirmation and your Zoom class links within 24 hours.</li>
+          <li>Monthly plans: send the payment again each month to keep your spot.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="yoga-signup" class="block wrap">
+      <h2>Sign up</h2>
+      <p class="sub">After you send your Zelle payment, fill this in so we can match it and email your Zoom links.</p>
+      <form class="form-card" data-table="yoga_signups" novalidate>
+        <div class="fgrid">
+          <label>Full name<input name="name" required autocomplete="name"></label>
+          <label>Email<input name="email" type="email" required autocomplete="email"></label>
+          <label>Phone (optional)<input name="phone" type="tel" autocomplete="tel"></label>
+          <label>Plan
+            <select name="plan" required><option value="">Choose one</option><option>Drop-in ($15)</option><option>8 classes monthly ($29)</option><option>Unlimited monthly ($39)</option><option>8 classes yearly ($290)</option><option>Unlimited yearly ($390)</option></select>
+          </label>
+          <label class="full">Classes you want to join (optional)<input name="classes" placeholder="e.g. Sunrise Flow, Evening Stretch"></label>
+          <label class="full">Name on your Zelle payment<input name="zelle_name" required placeholder="So we can find your payment"></label>
+          <label class="check full"><input type="checkbox" name="paid" value="true" required> I've sent the Zelle payment</label>
+          <label class="check full"><input type="checkbox" name="adult" value="true" required> I'm 18 or older</label>
+        </div>
+        <button class="btn gold" type="submit">Complete sign-up</button>
+        <p class="fmsg" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section class="block wrap">
+      <h2>Questions</h2>
+      <div class="faq">
+        <div><h3>Do I need experience?</h3><p>No. Beginner classes are marked on the schedule.</p></div>
+        <div><h3>What do I need?</h3><p>A yoga mat, a quiet space, and Zoom on any device.</p></div>
+        <div><h3>Can I cancel?</h3><p>Yes. Just don't send next month's payment. You keep access until the end of the month you paid for.</p></div>
+        <div><h3>Who can join?</h3><p>Adults 18 and over. Zelle requires a US bank account.</p></div>
+      </div>
+    </section>
+  </div>
 </div>
-</div>
-</section>
 
-<section class="testimonials" id="testimonials">
-<div class="container">
-<h2>What Parents & Students Say</h2>
-
-<div class="cards">
-<div class="card">
-<p>“Coach Krishna helped my child overcome water fear in just a few weeks. Very professional.”</p>
-<strong>— Priya S., San Jose</strong>
-</div>
-
-<div class="card">
-<p>“Amazing coaching and clear feedback on strokes. I improved quickly.”</p>
-<strong>— Michael R., Santa Clara</strong>
-</div>
-
-<div class="card">
-<p>“Punctual, friendly, and great with kids. Highly recommended.”</p>
-<strong>— Anjali K., Fremont</strong>
-</div>
-</div>
-</div>
-</section>
-
-<section class="cta" id="book">
-<div class="container">
-<h2>Book Your First Lesson Today</h2>
-<p>Call or text to check availability and choose a program that fits your goal.</p>
-<a class="btn" href="tel:6504501938">📞 Call Now: 650-450-1938</a>
-<a class="btn btn-outline" href="sms:6504501938">💬 Text Now</a>
-</div>
-</section>
-
-<footer class="footer">
-<div class="container">
-<p>© 2026 Water & Me. All Rights Reserved.</p>
-</div>
-</footer>
+</main>
 
 <footer>
-    <p>© 2026 Water & Me LLC| Coach Krishna Mamindla</p>     
-    
+  <div class="wrap">
+    <p>© 2026 Water &amp; Me LLC · Coach Krishna Mamindla · San Jose, CA</p>
+    <p><a href="tel:+16504501938">650-450-1938</a> · <a href="mailto:waterandme@gmail.com">waterandme@gmail.com</a></p>
+  </div>
 </footer>
 
+<script>
+(function(){
+  // Tabs: #swim (default) and #yoga. Section links like #yoga-plans open the right tab too.
+  var views={swim:document.getElementById('view-swim'),yoga:document.getElementById('view-yoga')};
+  var tabs=document.querySelectorAll('.tabs a');
+  var current=null;
+  function route(){
+    var h=(location.hash||'').slice(1);
+    var tab=h.indexOf('yoga')===0?'yoga':'swim';
+    var changed=tab!==current;
+    current=tab;
+    views.swim.hidden=tab!=='swim';
+    views.yoga.hidden=tab!=='yoga';
+    tabs.forEach(function(a){ if(a.dataset.tab===tab){a.setAttribute('aria-current','page');}else{a.removeAttribute('aria-current');} });
+    document.title=(tab==='yoga'?'Online Yoga':'Swim Lessons')+' | Water & Me';
+    var target=(h==='swim'||h==='yoga'||!h)?null:document.getElementById(h);
+    if(target){ target.scrollIntoView(); } else if(changed){ window.scrollTo(0,0); }
+  }
+  window.addEventListener('hashchange',route);
+  route();
+
+  // Yoga billing toggle
+  var m=document.getElementById('bill-monthly'), y=document.getElementById('bill-yearly');
+  function setBill(yearly){
+    m.setAttribute('aria-pressed',String(!yearly)); y.setAttribute('aria-pressed',String(yearly));
+    document.querySelectorAll('[data-m]').forEach(function(el){ el.textContent=yearly?el.dataset.y:el.dataset.m; });
+  }
+  m.addEventListener('click',function(){setBill(false);});
+  y.addEventListener('click',function(){setBill(true);});
+
+  // Forms: save to Supabase (insert only; the public key can't read anything back)
+  var SB_URL='https://nguktvecmgzwqfgzfslr.supabase.co', SB_KEY='sb_publishable_fALIqp-QymT1pUnfnrxSXA_G-RyvYQz';
+  document.querySelectorAll('form[data-table]').forEach(function(f){
+    f.addEventListener('submit',function(e){
+      e.preventDefault();
+      var msg=f.querySelector('.fmsg'), btn=f.querySelector('button[type=submit]');
+      var ok=true;
+      f.querySelectorAll('[required]').forEach(function(el){
+        var bad=el.type==='checkbox'?!el.checked:!el.value.trim();
+        if(!bad&&el.type==='email')bad=!/^\S+@\S+\.\S+$/.test(el.value.trim());
+        el.classList.toggle('bad',bad); if(bad)ok=false;
+      });
+      if(!ok){msg.className='fmsg err';msg.textContent='Please fill in the highlighted fields.';return;}
+      var row={};
+      new FormData(f).forEach(function(v,k){ if(k==='paid'||k==='adult'){row[k]=true;} else if(String(v).trim()){row[k]=String(v).trim();} });
+      btn.disabled=true; msg.className='fmsg'; msg.textContent='Sending…';
+      fetch(SB_URL+'/rest/v1/'+f.dataset.table,{method:'POST',headers:{'apikey':SB_KEY,'Authorization':'Bearer '+SB_KEY,'Content-Type':'application/json','Prefer':'return=minimal'},body:JSON.stringify(row)})
+        .then(function(r){
+          if(!r.ok)throw new Error(r.status);
+          f.reset(); msg.className='fmsg ok';
+          msg.textContent=f.dataset.table==='yoga_signups'?'You’re signed up! We’ll email your Zoom links within 24 hours.':'Request sent! Coach Krishna will reach out soon.';
+        })
+        .catch(function(){ msg.className='fmsg err'; msg.textContent='Something went wrong. Please call or text 650-450-1938.'; })
+        .finally(function(){ btn.disabled=false; });
+    });
+  });
+
+  // Copy Zelle email
+  var b=document.getElementById('copy-email');
+  function selectEmail(){ var r=document.createRange(); r.selectNodeContents(document.getElementById('zelle-email')); var s=window.getSelection(); s.removeAllRanges(); s.addRange(r); }
+  b.addEventListener('click',function(){
+    var done=function(){ b.textContent='Copied'; setTimeout(function(){b.textContent='Copy';},1500); };
+    try{ navigator.clipboard.writeText('waterandme@gmail.com').then(done,selectEmail); }catch(e){ selectEmail(); }
+  });
+})();
+</script>
 </body>
-
 </html>
-
-
-
