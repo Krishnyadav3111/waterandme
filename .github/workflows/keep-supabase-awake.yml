@@ -1,1 +1,18 @@
+name: Keep Supabase awake
 
+# Free Supabase projects pause after ~7 days with no activity.
+# This pings the database every 3 days so the website forms keep working.
+on:
+  schedule:
+    - cron: "17 16 */3 * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase
+        run: |
+          curl -fsS "https://nguktvecmgzwqfgzfslr.supabase.co/rest/v1/heartbeat?select=id" \
+            -H "apikey: sb_publishable_fALIqp-QymT1pUnfnrxSXA_G-RyvYQz" \
+            -H "Authorization: Bearer sb_publishable_fALIqp-QymT1pUnfnrxSXA_G-RyvYQz"
